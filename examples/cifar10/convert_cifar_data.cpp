@@ -52,7 +52,7 @@ void convert_dataset(const string& input_folder, const string& output_folder,
   for (int fileid = 0; fileid < kCIFARTrainBatches; ++fileid) {
     // Open files
     LOG(INFO) << "Training Batch " << fileid + 1;
-    snprintf(str_buffer, kCIFARImageNBytes, "/data_batch_%d.bin", fileid + 1);
+    _snprintf(str_buffer, kCIFARImageNBytes, "/data_batch_%d.bin", fileid + 1);
     std::ifstream data_file((input_folder + str_buffer).c_str(),
         std::ios::in | std::ios::binary);
     CHECK(data_file) << "Unable to open train file #" << fileid + 1;
@@ -60,7 +60,7 @@ void convert_dataset(const string& input_folder, const string& output_folder,
       read_image(&data_file, &label, str_buffer);
       datum.set_label(label);
       datum.set_data(str_buffer, kCIFARImageNBytes);
-      int length = snprintf(str_buffer, kCIFARImageNBytes, "%05d",
+      int length = _snprintf(str_buffer, kCIFARImageNBytes, "%05d",
           fileid * kCIFARBatchSize + itemid);
       string out;
       CHECK(datum.SerializeToString(&out));
@@ -82,7 +82,7 @@ void convert_dataset(const string& input_folder, const string& output_folder,
     read_image(&data_file, &label, str_buffer);
     datum.set_label(label);
     datum.set_data(str_buffer, kCIFARImageNBytes);
-    int length = snprintf(str_buffer, kCIFARImageNBytes, "%05d", itemid);
+    int length = _snprintf(str_buffer, kCIFARImageNBytes, "%05d", itemid);
     string out;
     CHECK(datum.SerializeToString(&out));
     txn->Put(string(str_buffer, length), out);
