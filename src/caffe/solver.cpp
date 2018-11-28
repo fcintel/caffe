@@ -1,5 +1,6 @@
 #include <cstdio>
-
+#include <stdio.h>  
+#include <stdlib.h> 
 #include <algorithm>
 #include <string>
 #include <vector>
@@ -505,7 +506,7 @@ void Solver<Dtype>::Snapshot() {
   string model_filename, snapshot_filename;
   const int kBufferSize = 20;
   char iter_str_buffer[kBufferSize];
-  snprintf(iter_str_buffer, kBufferSize, "_iter_%d", iter_);
+  _snprintf(iter_str_buffer, kBufferSize, "_iter_%d", iter_);
   filename += iter_str_buffer;
   model_filename = filename + ".caffemodel";
   LOG(INFO) << "Snapshotting to " << model_filename;
